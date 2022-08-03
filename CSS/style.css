@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+:root{
+    --backColor : rgb(42,42,42);
+}
+/* Header */
+header{
+    background-color: var(--backColor);
+    text-align: center;
+    color:rgb(92, 209, 255);
+    font-family: 'Tangerine', cursive;
+    font-size: 29px;
+    letter-spacing: 3px;
+    font-weight:bold;
+    padding: 7px;
+    border-bottom: .1px solid rgb(204, 204, 204);
+}
+/* Navbar */
+nav{
+    background-color: var(--backColor);
+    color: white;
+    font-family: 'Oxygen', sans-serif;
+}
+nav .active{
+    color:rgb(52, 198, 255);
+}
+nav ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+nav ul li{
+    list-style: none;
+    position: relative;
+}
+nav ul li a{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 17.1px;
+    letter-spacing: 2px;
+    margin: 0px 20px;
+    cursor: pointer;
+    transition: all ease .3s;
+    padding: 10px;
+}
+nav ul li a:hover{
+    color:rgb(52, 198, 255);
+}
+/* Wrapper */
+#wrapper{
+    height: auto;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    overflow-x: hidden;
+}
+
+/* Main */
+main h2{
+    text-align: center;
+}
+/* Sign up page */
+.generalForm{
+    border: 1px solid gray;
+    width: 33%;
+    margin: 20px auto;
+    padding: 11px;
+    display: flex;
+    flex-direction: column;
+}
+.generalForm h2{
+    letter-spacing: .8px;
+    color: rgb(10, 164, 224);
+    margin-bottom: 13px;
+}
+.generalForm input,select{
+    font-size: 17px;
+    padding: 4px;
+    margin: 7px 0px;
+}
+.generalForm label,span{
+    font-size: 18px;
+    font-weight: bold;
+}
+#signUpBtn,#signInBtn,#addSellerBtn,#updateBtn,#displayProducts{
+    background-color: var(--backColor);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    font-size: 17px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 10px;
+}
+/* Product Images */
+.productImg{
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+}
+/* Footer */
+footer{
+    padding: 17px;
+    text-align: center;
+    background-color: var(--backColor);
+    color:white;
+    font-size: 14px;
+    letter-spacing: .9px;
+    word-spacing: 1px;
+    font-family: 'Oxygen', sans-serif;
+}

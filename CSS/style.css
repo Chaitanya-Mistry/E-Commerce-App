@@ -90,6 +90,16 @@ main h2{
     font-size: 18px;
     font-weight: bold;
 }
+/* Seller's Products */
+.sellerProductsChoices{
+    margin-top: 7px;
+    border: 1px solid grey;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
 #signUpBtn,#signInBtn,#addSellerBtn,#updateBtn,#displayProducts{
     background-color: var(--backColor);
     color: white;

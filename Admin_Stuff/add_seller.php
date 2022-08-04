@@ -28,7 +28,7 @@ function loadProducts(){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require('../Validation.php');
     require('../User_Operations/add_seller_data.php');
-    
+    require_once('../Database.php');
     $validation = new Validation();
     // Empty Fields checkers
     // Firm Name
@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $noError = false;
     } else {
         $firmName = $_POST['firmName'];
+        loadProducts();
         if ($validation->checkSpecialChars($firmName)) {
             $firmNameErr = "Only letters and white space allowed";    
             $noError = false;        
@@ -49,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $noError = false;
     }else{
         $sellerEmail = $validation->sanitize_input($_POST['sellerEmail']);
+        loadProducts();
         if(!$validation->validateEmail($sellerEmail)){
             $sellerEmailErr = "Invalid email format";
             $noError = false;
@@ -63,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $noError = false;
     }else{
         $sellerStreet =  $validation->sanitize_input($_POST['sellerStreet']);
+        loadProducts();
     }
     // Postal
     if($validation->checkEmpty($_POST['sellerPostal'])){
@@ -71,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }else{
         $sellerPostal = $validation->sanitize_input($_POST['sellerPostal']);
         $sellerPostalErr = $validation->postalValid($sellerPostal);
+        loadProducts();
     }
     // Country
     if(empty($_POST['sellerCountry'])){
@@ -78,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $noError = false;
     }else{
         $sellerCountry = $validation->sanitize_input($_POST['sellerCountry']);
+        loadProducts();
     }
     // State
     if(empty($_POST['sellerState'])){
@@ -85,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $noError = false;
     }else{
         $sellerState = $validation->sanitize_input($_POST['sellerState']);
+        loadProducts();
     }
     // City
     if(empty($_POST['sellerCity'])){
@@ -92,23 +98,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $noError = false;
     }else{
         $sellerCity = $validation->sanitize_input($_POST['sellerCity']);
+        loadProducts();
     }
 
     // If everything is perfect, add data to the database.
     if($noError){
-        $result = addSeller($firmName,$sellerEmail,$sellerStreet,$sellerPostal,$sellerCountry,$sellerState,$sellerCity,$_POST['sellerProduct']);
 
-        if($result){
-            echo"<script>alert('Seller data added successfully ..')</script>";
-            // Empty the values so that form input fields will be empty.
-            $firmName = $sellerEmail = $sellerStreet = $sellerPostal = "";          
-            $results = loadProducts();
-        }
-        else{
-            echo "<script>
-                alert('There is some problem in the database');
-            </script>";
-            $results = loadProducts();
+        $sellerId = addSeller($firmName,$sellerEmail,$sellerStreet,$sellerPostal,$sellerCountry,$sellerState,$sellerCity);
+
+        if($sellerId){
+            $database = new Database();
+            $sellerProducts = $_POST['sellerProducts'];
+            $final_result = true;
+            foreach ($sellerProducts as $productId) {
+                $create_seller_product = "INSERT INTO sold_by_products(idproduct,idsold_by) VALUES(?,?)";
+                $stmt = mysqli_prepare($database->getDbc(),$create_seller_product);
+                // Bind the data in the query
+                mysqli_stmt_bind_param(
+                    $stmt,
+                    'ii',
+                    $productId,
+                    $sellerId
+                );
+                // Execute the query
+                $temp_result = mysqli_stmt_execute($stmt);
+                if(!$temp_result){
+                    $final_result = false;
+                }
+            }
+            // End of foreach loop
+            
+            if($final_result){
+                echo"<script>alert('Seller data added successfully ..')</script>";
+                // Empty the values so that form input fields will be empty.
+                $firmName = $sellerEmail = $sellerStreet = $sellerPostal = "";          
+                $results = loadProducts();
+            }
+            else{
+                echo "<script>
+                    alert('There is some problem in the database');
+                </script>";
+                $results = loadProducts();
+            }
         }
     }
 }else{
@@ -204,20 +235,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
                 <!-- Assign Product -->
                 <!-- Error displayer-->
-                <label for="sellerProduct">Assign Product:</label>
-                <select name="sellerProduct" id="sellerProduct" >
+                <!-- <label for="sellerProduct">Assign Product:</label> -->
+                <!-- <select name="sellerProduct" id="sellerProduct" required>
                     <option value="" selected disabled hidden>Select</option>
+                </select> -->
+                <p style="margin-top: 5px;"><b>Assign Product:</b></p>
+                <div class="sellerProductsChoices">
                     <?php
                         if($results){
                             while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){                                
                                 $str_to_print = "";
-                                $str_to_print.= "<option value='{$row['idproduct']}'>{$row['name']}</option>";
+                                $str_to_print.= "<input type='checkbox' id='{$row['name']}' name='sellerProducts[]' value='{$row['idproduct']}'>
+                                <label for='{$row['name']}'>{$row['name']}</label><br>";
     
                                 echo $str_to_print;
                             }
                         }
                     ?>
-                </select>
+                </div>
                 <input type="submit" value="Add Seller" id="addSellerBtn">
             </form>
         </main>

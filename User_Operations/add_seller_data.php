@@ -2,7 +2,7 @@
 require("../Database.php");
 
 // CREATE a new user
-function addSeller($sName,$sEmail,$sStreet,$sPostal,$sCountry,$sState,$sCity,$pId){
+function addSeller($sName,$sEmail,$sStreet,$sPostal,$sCountry,$sState,$sCity){
     $database = new Database();
     $cleanSName = $database->prepare_string($sName);
     $cleanSEmail = $database->prepare_string($sEmail);
@@ -11,8 +11,7 @@ function addSeller($sName,$sEmail,$sStreet,$sPostal,$sCountry,$sState,$sCity,$pI
     $cleanSCountry = $database->prepare_string($sCountry);
     $cleanSState = $database->prepare_string($sState);
     $cleanSCity = $database->prepare_string($sCity);
-    $cleanPId = $database->prepare_string($pId);
-
+    // $cleanPId = $database->prepare_string($pId);
         // First store user's address
         $store_user_address_query = "INSERT INTO address(street,postal_code,city,state,country_name) VALUES(?,?,?,?,?)";
         $stmt = mysqli_prepare($database->getDbc(), $store_user_address_query);
@@ -50,19 +49,8 @@ function addSeller($sName,$sEmail,$sStreet,$sPostal,$sCountry,$sState,$sCity,$pI
             $createdSellerId = mysqli_insert_id($database->getDbc());
 
             // Then store seller's products (Sold By Products Table)
-            if($result){
-                $create_seller_product = "INSERT INTO sold_by_products(idproduct,idsold_by) VALUES(?,?)";
-                $stmt = mysqli_prepare($database->getDbc(),$create_seller_product);
-                // Bind the data in the query
-                mysqli_stmt_bind_param(
-                    $stmt,
-                    'ii',
-                    $cleanPId,
-                    $createdSellerId
-                );
-                // Execute the query
-                $final_result = mysqli_stmt_execute($stmt);
-                return $final_result;
+            if($result && $createdSellerId){
+                return $createdSellerId;
             }
         }
 }

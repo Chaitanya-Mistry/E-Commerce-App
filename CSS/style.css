@@ -118,6 +118,46 @@ main h2{
     display: block;
     margin: 0 auto;
 }
+/* Customer Panel's Products */
+.products{
+    /* border:2px solid red; */
+    width: 90%;
+    margin: 13px auto;
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.individualProduct{
+    border: 1px solid gray;
+    padding: 10px;
+    width: 32.3%;
+}
+.productImageContainer img{
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+}
+.productDescContainer{
+    margin-top: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.addCartBtn{
+    width: 100%;
+    background-color:rgb(79, 79, 79);
+    color:rgb(52, 198, 255);
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+}
+.addCartBtn:hover{
+    background-color:var(--backColor);
+}
 /* Footer */
 footer{
     padding: 17px;

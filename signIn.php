@@ -43,7 +43,7 @@
             $userType = $validation->sanitize_input($_POST['userType']);
         }
 
-        // If everything is perfect, add data to the database & redirect a user to the "Login" Page.
+        // Fetch user from the database
         if($noError){
             getUser($userEmail,$userPassword,$userType);
         }

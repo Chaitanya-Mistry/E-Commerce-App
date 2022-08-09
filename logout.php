@@ -1,6 +1,9 @@
 <?php
     session_start();
-    $_SESSION['AdminLoginId'] = null;
+    // Remove all session variables
+    session_unset();
+    // Destroy the session
     session_destroy();
+    
     header("location:index.html");
 ?>

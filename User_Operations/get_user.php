@@ -28,7 +28,7 @@ function getUser($uEmail,$uPassword,$uType){
             }
             if($cleanUType == 'Customer'){
                 $_SESSION['CustomerLoginId'] = $cleanUEmail;
-                header("location:./Customer.php");
+                header("location:./Customer/Customer.php");
             }
             exit();
         }else{

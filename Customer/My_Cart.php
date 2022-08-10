@@ -42,28 +42,31 @@
                 </thead>
                 <tbody>
                     <?php
-                            $sr_no = 0;
-                            foreach ($_SESSION['cart'] as $key => $value) {
-                                $sr_no++;
-                                $str_to_print = "";
-                                $str_to_print .= "
-                                    <tr>
-                                        <td>$sr_no</td>
-                                        <td> {$value['product_name']}</td>
-                                        <td> {$value['product_price']}</td>
-                                        <td><input type='number' value='1' min='1' max='50'/></td>
-                                        <td>100</td>
-                                        <td>
-                                            <form action='./manage_cart.php' method='post'>
-                                                <input type='submit' class='remove_item_btn' name='remove_item_btn' value='Remove'/>
-                                                <input type='hidden' name='product_to_be_removed' value='$value[product_name]'>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                ";
-        
-                                echo $str_to_print;
-                            }                
+                            if(isset($_SESSION['cart'])){
+                                $sr_no = 0;
+                                foreach ($_SESSION['cart'] as $key => $value) {
+                                    $sr_no++;
+                                    $str_to_print = "";
+                                    $str_to_print .= "
+                                        <tr>
+                                            <td>$sr_no</td>
+                                            <td> {$value['product_name']}</td>
+                                            <td> {$value['product_price']}</td>
+                                            <td><input type='number' value='1' data-product_price='{$value['product_price']}' data-position = '{$sr_no}' min='1' max='50' class='product_quantity'/></td>
+                                            <td class='total_individual_price'>{$value['product_price']}</td>
+                                            <td>
+                                            <!-- To remove the particular product from the cart -->
+                                                <form action='./manage_cart.php' method='post'>
+                                                    <input type='submit' class='remove_item_btn' name='remove_item_btn' value='Remove'/>
+                                                    <input type='hidden' name='product_to_be_removed' value='$value[product_name]'>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    ";
+            
+                                    echo $str_to_print;
+                                }                
+                            }                           
                     ?>  
                     
                 </tbody>
@@ -86,11 +89,10 @@
                     <button id='place_order_btn'>Place Order</button>
                 </div>";
                 }else{
-                    echo "Cart is Emty please add something..";
+                    echo "<h3 style='color:red;'>Cart is Emty please add something..</h3>";
                 }
             ?>
-           
-            
+                       
         </main>
 
         <!-- Footer -->
@@ -98,5 +100,37 @@
             <section id="Copyright"> Copyright &copy; Very Nice Studio 2021. All Rights Reserved</section>
         </footer>
 
+        <!-- Embeded JS to implement Quantity functionality of product -->
+        <script>
+            const product_quantity = document.getElementsByClassName('product_quantity');
+            const total_individual_price = document.getElementsByClassName('total_individual_price');
+            const total_price_displayer = document.getElementById('total_price');
+            
+            // Quantity
+            Array.from(product_quantity).forEach(element => {
+               element.addEventListener('input',updatePrice);
+            });
+
+            // To update product's price
+            function updatePrice(){
+                // console.log(this.value,this.dataset.product_price);         
+                // console.warn((this.value * this.dataset.product_price).toFixed(2));
+                // console.warn(this.dataset.position);
+                // console.warn(total_individual_price[this.dataset.position-1])
+                total_individual_price[this.dataset.position-1].innerText = (this.value * this.dataset.product_price).toFixed(2);
+                
+                updateTotalPrice();
+            }
+
+            // To update Grand Total 
+            function updateTotalPrice(){
+                let total_price = 0;
+                Array.from(total_individual_price).forEach(element=>{
+                    total_price+= parseFloat(element.innerText);
+                });
+                total_price_displayer.innerText = '$'+total_price.toFixed(2);
+            }
+
+        </script>
 </body>
 </html>

@@ -158,6 +158,76 @@ main h2{
 .addCartBtn:hover{
     background-color:var(--backColor);
 }
+/* My Cart Page */
+.my_cart_table{
+    font-family: arial, sans-serif;
+    font-size: 18.9px;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 10px auto;
+}
+.my_cart_table th{
+    background-color: black;
+    color: white;
+}
+.my_cart_table td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+#confirm_order_container{
+    width: 80%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+#place_order_btn{
+    color: dodgerblue;
+    background-color: white;
+    padding: 10px;
+    font-weight: bold;
+    transition: all;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+}
+#place_order_btn:hover{
+    background-color: dodgerblue;
+    color: white;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.total_price_container{
+    width: fit-content;
+}
+.total_price_container h3{
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    padding: 10px;
+}
+#total_price{
+    color: red;
+    font-size: 20px;
+    letter-spacing: .8px;
+}
+.my_cart_table tr:hover {
+    background-color: #f2f2f2;
+}
+.my_cart_table .remove_item_btn{
+    padding: 10px;
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    cursor: pointer;
+    transition: all;
+    transition-timing-function: ease;
+    transition-duration: .2s;
+}
+.my_cart_table .remove_item_btn:hover{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}
 /* Footer */
 footer{
     padding: 17px;

@@ -27,20 +27,8 @@
 
 <body>
     <div id="wrapper">
-
-        <!-- Header -->
-        <header>
-            <h2>Very Nice Shopping 🛒</h2>
-        </header>
-
-        <!-- Navigation -->
-        <nav>
-            <ul>
-                <li><a href="Customer.php">🏡 Home</a></li>
-                <li><a href="my_cart.php">My Cart</a></li>                
-                <li><a id="logoutLink" href="../logout.php">Logout</a></li>
-            </ul>
-        </nav>
+        <!-- Header & Navbar -->
+        <?php include('../Customer/navbar.php') ?>
 
         <!-- Main -->
         <main style="margin-top: 10px;text-align:center;">
@@ -52,20 +40,26 @@
                         // output data of each row
                         while($row = mysqli_fetch_array($found_products, MYSQLI_ASSOC)) {
                             $str_to_prnt = "";
-                            $str_to_prnt .= "<div class='individualProduct'>
-                                    <!-- Product Image -->
-                                    <div class='productImageContainer'>
-                                        <img src='{$row['image']}'>
-                                    </div>
-                                    <hr/>
-                                    <!-- Products details -->
-                                    <div class='productDescContainer'>
-                                        <!-- Name -->
-                                        <p><b>{$row['name']}</b></p>
-                                        <p><span style='color:red'><b>Price:</b></span> &dollar;{$row['price']}</p>
-                                        <p style='text-align:justify;font-size:19px'>{$row['description']}</p>                                    
-                                        <button class='addCartBtn'>Add To Cart </button>
-                                    </div>
+                            $str_to_prnt .= "
+                            <div class='individualProduct'>
+                                <form action='manage_cart.php' method='POST'>       
+                                        <!-- Product Image -->
+                                        <div class='productImageContainer'>
+                                            <img src='{$row['image']}'>
+                                        </div>
+                                        <hr/>
+                                        <!-- Products details -->
+                                        <div class='productDescContainer'>
+                                            <!-- Name -->
+                                            <p><b>{$row['name']}</b></p>
+                                            <p><span style='color:red'><b>Price:</b></span> &dollar;{$row['price']}</p>
+                                            <p style='text-align:justify;font-size:19px'>{$row['description']}</p>       
+                                            
+                                            <input type='hidden' name='product_name' value='{$row['name']}'>
+                                            <input type='hidden' name='product_price' value='{$row['price']}'>
+                                            <button class='addCartBtn' name='add_to_cart_btn'>Add To Cart </button>
+                                        </div>
+                                </form>
                             </div>";
                             echo $str_to_prnt;
                         }

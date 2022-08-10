@@ -28,7 +28,15 @@
 
         <!-- Main -->
         <main style="margin-top: 10px;text-align:center;">
-    
+
+            <!-- Order placed successfully prompt -->
+            <div id="orderSuccess">
+                
+                <h3>Your Order Placed Successfully 🚚</h3>
+                <button id='invoice_download_btn'>Download Invoice</button>
+
+            </div>
+
             <table class="my_cart_table">
                 <thead>
                     <tr>
@@ -100,16 +108,36 @@
             <section id="Copyright"> Copyright &copy; Very Nice Studio 2021. All Rights Reserved</section>
         </footer>
 
-        <!-- Embeded JS to implement Quantity functionality of product -->
+        <!-- Embeded JS to implement Quantity functionality of product & display order completion -->
         <script>
+
             const product_quantity = document.getElementsByClassName('product_quantity');
             const total_individual_price = document.getElementsByClassName('total_individual_price');
             const total_price_displayer = document.getElementById('total_price');
+            // Order Placed Prompt
+            const orderSuccessPrompt = document.getElementById('orderSuccess');
+            const invoice_download_btn = document.getElementById('invoice_download_btn');
+
+            // Place Order Button
+            const place_order_btn = document.getElementById('place_order_btn');
+            place_order_btn.addEventListener('click',orderPlaced);
+
+            // Invoice download Button
+            invoice_download_btn.addEventListener('click',()=>{
+                setTimeout(() => {
+                    orderSuccessPrompt.style.visibility = 'hidden';
+                }, 200);
+            });
             
             // Quantity
             Array.from(product_quantity).forEach(element => {
                element.addEventListener('input',updatePrice);
             });
+
+            // To display order placed message
+            function orderPlaced(){
+                orderSuccessPrompt.style.visibility = 'visible';
+            }
 
             // To update product's price
             function updatePrice(){

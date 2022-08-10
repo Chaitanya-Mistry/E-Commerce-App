@@ -213,6 +213,40 @@ main h2{
 .my_cart_table tr:hover {
     background-color: #f2f2f2;
 }
+/* Order Success Prompt */
+#orderSuccess{
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.587);
+    color: white;
+    width:30%;
+    height: 35%;
+    margin: 0px auto;
+    position: fixed;
+    top: 35%;
+    left: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    letter-spacing: .8px;
+    word-spacing: 1px;
+    padding: 20px;
+}
+#invoice_download_btn{
+    background-color: rgb(222, 255, 91);
+    width: 45%;
+    padding: 10px;
+    margin: 23px auto;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition-property: background-color,font-size;
+    transition-timing-function: linear;
+    transition-duration: .2s;
+}
+#invoice_download_btn:hover{
+    background-color: rgb(199, 239, 40);
+    font-size: 18px;
+}
 .my_cart_table .remove_item_btn{
     padding: 10px;
     background-color: white;

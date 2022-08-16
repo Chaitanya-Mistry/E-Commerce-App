@@ -55,8 +55,10 @@
                                             <p><span style='color:red'><b>Price:</b></span> &dollar;{$row['price']}</p>
                                             <p style='text-align:justify;font-size:19px'>{$row['description']}</p>       
                                             
+                                            <input type='hidden' name='product_id' value='{$row['idproduct']}'>
                                             <input type='hidden' name='product_name' value='{$row['name']}'>
-                                            <input type='hidden' name='product_price' value='{$row['price']}'>
+                                            <input type='hidden' name='product_price' value='{$row['price']}'>                                        
+                                            <input type='hidden' name='product_total_price' value='{$row['price']}'>                                        
                                             <button class='addCartBtn' name='add_to_cart_btn'>Add To Cart </button>
                                         </div>
                                 </form>

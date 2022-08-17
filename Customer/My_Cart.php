@@ -40,7 +40,7 @@
                             <th scope="col">Product Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">Total &dollar;</th>
                             <th scope="col">Operation</th>
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@
                                                 <td>$sr_no</td>
                                                 <td>{$value['product_id']}</td>
                                                 <td> {$value['product_name']}</td>
-                                                <td> {$value['product_price']}</td>
+                                                <td> &dollar;{$value['product_price']}</td>
                                                 <td>
                                                     <input type='number' value='{$value['product_quantity']}' data-product_price='{$value['product_price']}' data-position = '{$sr_no}' data-product_id='{$value['product_id']}' min='1'max='50' class='product_quantity'name='product_quantity'/></td>
                                                     <td class='total_individual_price'>{$value['product_total_price']}</td>
@@ -170,7 +170,7 @@
                 
                 // SET TOTAL FINAL CHECKOUT PRICE using Session Storage 
                 sessionStorage.setItem('total_price_final',`${total_price.toFixed(2)}`);
-                total_price_displayer.innerText = sessionStorage.getItem('total_price_final');
+                total_price_displayer.innerText = '$'+sessionStorage.getItem('total_price_final');
             }
 
         </script>

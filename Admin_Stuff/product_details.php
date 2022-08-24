@@ -110,13 +110,13 @@ session_start();
         <!-- Main -->
         <main>
             <?php 
-                if(!$noData){
-
+                if($noData){
+                    echo "<h3 style='color:red;text-align:center;margin:13px 0px;'>No data to display..</h3>";
                 }
             ?>
-            <table width="80%">
+            <table width="80%" id="product_details_table">
                 <thead>
-                    <tr align="left">
+                    <tr>
                         <th>Sr. No.</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -125,30 +125,30 @@ session_start();
                         <th>Operatations</th>
                     </tr>
                 </thead>
-            <tbody>
-                <?php
-                        $sr_no = 0;
-                        while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
-                            $sr_no++;
-                            $str_to_print = "";
-                            $str_to_print .= "<tr><td>$sr_no</td>";
-                            $str_to_print .= "<td> {$row['name']}</td>";
-                            $str_to_print .= "<td> {$row['description']}</td>";
-                            $str_to_print .= "<td> {$row['price']}</td>";
-                            $str_to_print .= "<td><img src='{$row['image']}' class='productImg'/></td>";
-                            $str_to_print .= "<td class='font-icons'> 
-                                    <a href='edit_product.php?product_id={$row['idproduct']}'>
-                                        <i class='fa fa-edit icons' id='edit'></i>
-                                    </a>
-                                    <i class='fa fa-remove icons deleteIcons' id='delete' data-productname='{$row['name']}' data-productid='{$row['idproduct']}'></i>                            
-                                </td> 
-                            </tr>";
-    
-                            echo $str_to_print;
-                        }
-                ?>
-            </tbody>
-        </table>
+                <tbody>
+                    <?php
+                            $sr_no = 0;
+                            while($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
+                                $sr_no++;
+                                $str_to_print = "";
+                                $str_to_print .= "<tr><td>$sr_no</td>";
+                                $str_to_print .= "<td> {$row['name']}</td>";
+                                $str_to_print .= "<td> {$row['description']}</td>";
+                                $str_to_print .= "<td> {$row['price']}</td>";
+                                $str_to_print .= "<td><img src='{$row['image']}' class='productImg'/></td>";
+                                $str_to_print .= "<td class='font-icons'> 
+                                        <a href='edit_product.php?product_id={$row['idproduct']}'>
+                                            <i class='fa fa-edit icons' id='edit'></i>
+                                        </a>
+                                        <i class='fa fa-remove icons deleteIcons' id='delete' data-productname='{$row['name']}' data-productid='{$row['idproduct']}'></i>                            
+                                    </td> 
+                                </tr>";
+        
+                                echo $str_to_print;
+                            }
+                    ?>
+                </tbody>
+            </table>
         <button id="addProductBtn" onclick="window.location.href='./add_product.php'">Add Products</button>
         </main>
 

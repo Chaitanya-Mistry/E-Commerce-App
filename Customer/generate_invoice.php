@@ -103,9 +103,6 @@
             // Fetching data from order table
             $customer_order_data = mysqli_query($database->getDbc(),"SELECT product.name ,quantity, total_price FROM user u INNER JOIN orders ON u.iduser = orders.iduser INNER JOIN product ON product.idproduct = orders.idproduct WHERE u.iduser = $customer_id;");
 
-            // foreach($customer_order_data as $key){
-            //     print_r($key);
-            // }
             $pdf = new PDF();
             // //header
             $pdf->AddPage();

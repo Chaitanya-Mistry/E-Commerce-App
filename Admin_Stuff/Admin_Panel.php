@@ -42,7 +42,7 @@ if (!isset($_SESSION['AdminLoginId'])) {
 
         <!-- Main -->
         <main style="display:grid;place-content:center">
-            <h2>Welcome to the admin panel ... </h2>
+            <h2>Welcome to the admin panel 👨‍💻 </h2>
         </main>
 
         <!-- Footer -->

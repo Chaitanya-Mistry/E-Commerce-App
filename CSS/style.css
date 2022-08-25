@@ -121,7 +121,7 @@ main h2{
 /* Customer Panel's Products */
 .products{
     /* border:2px solid red; */
-    width: 90%;
+    width: 96%;
     margin: 13px auto;
     padding:10px;
     display: flex;
@@ -132,7 +132,7 @@ main h2{
 .individualProduct{
     border: 1px solid gray;
     padding: 10px;
-    width: 32.3%;
+    width: 31.5%;
 }
 .productImageContainer img{
     width: 190px;
@@ -277,14 +277,21 @@ footer{
 
 /* Responsive design takes place here */
 
-/* For Tablets */
+/* For Tablets 💻*/
 @media screen and (min-width:481px) and (max-width:768px){
     /* Main Home Page */
-    body{background-color: rgb(220, 255, 151);}
+    /* body{background-color: rgb(220, 255, 151);} */
     header h2{font-size: 35px;}
     nav ul li a{font-size: 16px;}
     main h1,h2{font-size: 27px;}
     footer{font-size: 12px;}
+
+    /* Customer Pages */
+
+    /* Customer Home Page Where Products will be displayed ... */
+    .individualProduct{
+        width: 46%;
+    }
 
     /* Sign In & Sign Up Pages */
     .generalForm{width: 55%;margin-top: 10vh;}
@@ -294,14 +301,21 @@ footer{
 
 /* Admin Panel */
     /* Product Details Page */
+    #tableContainer{
+        margin: 50px auto;
+        width: 95vw;
+        overflow: auto;
+        height: 70%;
+    }
     #product_details_table{width: 96%;}
-    #product_details_table, #addProductBtn{font-size: 17px;} 
-    #product_details_table .productImg{width: 50px;} 
+    #product_details_table, #addProductBtn{font-size: 19px;} 
+    #product_details_table .productImg{width: 100px;} 
 }
-/* For Mobile phones */
+
+/* For Mobile phones 📴 */
 @media screen and (min-width:320px) and (max-width:480px){
     /* Main Home Page */
-    body{background-color: rgb(151, 255, 253);}
+    /* body{background-color: rgb(151, 255, 253);} */
     header h2{font-size: 33px;font-weight: bold;}
     nav ul li a{font-size: 14px;}
     nav ul{
@@ -315,10 +329,38 @@ footer{
     footer{font-size: 10.3px;}
 
     /* Admin Panel */
+
     /* Product Details Page */
-    #product_details_table{width: 80%; overflow-x: scroll;}
-    #product_details_table, #addProductBtn{font-size: 12px;}
-    #product_details_table .productImg{width: 87px;}
+    #tableContainer{
+        margin: 50px auto;
+        width: 87vw;
+        height: 71.7%;
+        overflow-x: scroll;
+    }
+    #product_details_table{width: 85%;}
+    #product_details_table, #addProductBtn{font-size: 17px;}
+    #product_details_table .productImg{width: 100px;}
+
+    /* Customer Pages */
+
+    /* Customer Home Page Where Products will be displayed ... */
+    .individualProduct{width: 100%;}
+    /* My Cart Page */
+    #my_cart_form{
+        width: 90vw;
+        height: 50vh;
+        margin: 10px auto;
+        overflow: auto;
+        /* border: 2px solid red; */
+        display: flex;
+        flex-direction: column;
+    }
+    #place_order_btn{width: 50vw;}
+    #orderSuccess{
+        left: auto;
+        width: 80vw;
+        background-color: rgba(0, 0, 0, 0.726);
+    }
 
     /* Sign In & Sign Up Pages */
     .generalForm{width: 75%}
